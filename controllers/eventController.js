@@ -49,6 +49,8 @@ module.exports.getByType = async (req, res, next) => {
 
 module.exports.CreateEvent = async (req, res) => {
     try {
+        const files = req.files
+        req.body.files = req.files
         const db = getDB();
         const event = await db.collection("Events").insertOne(req.body)
         return res.json({ statusCode: 200, status: "Ok", Message: ["New Event Registered"], result: { eventId: event.insertedId } });
